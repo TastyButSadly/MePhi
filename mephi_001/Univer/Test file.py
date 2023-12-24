@@ -3,7 +3,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-n = 100  # количество разбиений
+n = 100
 
 
 def f(x):

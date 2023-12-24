@@ -1,20 +1,24 @@
-import numpy as np
+with open('Week 14.2 data.txt', 'r') as file:
+    data = [line.split() for line in file]
 
-data = np.loadtxt('Week 14.2 data.txt')
+work = 0
+total_time = float(data[-1][0]) - float(data[0][0])
 
-def triangle_rule(f, a, b, N):
-    h = (b - a) / N
-    return h * sum(f(a + i * h) for i in range(N))
+for i in range(1, len(data) - 1):
+    time_i = float(data[i][0])
+    time_next = float(data[i + 1][0])
+    delta_t = time_next - time_i
 
-time = data[:, 0]
-position = data[:, 1]
-force = data[:, 2]
+    x_i = float(data[i][1])
+    force_i = float(data[i][2])
+    work += force_i * (x_i - float(data[i - 1][1]))
 
-work = triangle_rule()
-work = np.trapz(force, position)
+average_power = work / total_time
 
-average_power = work / (time[-1] - time[0])
 
-print(f'Работа силы: {work}\n'
-      f'Эталон:      0.4008387372')
-print(f'Средняя мощность: {average_power}')
+width = 10
+print(f'Общая работа :     {work:{width}f}\n'
+      f'Эталонная работа :   0.400838\n'
+      f'Средняя мощность : {average_power:{width}f}')
+
+
