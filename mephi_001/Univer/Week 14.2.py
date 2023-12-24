@@ -15,10 +15,7 @@ for i in range(1, len(data) - 1):
 
 average_power = work / total_time
 
-
-width = 10
+width = 10  # количество знаков
 print(f'Общая работа :     {work:{width}f}\n'
       f'Эталонная работа :   0.400838\n'
       f'Средняя мощность : {average_power:{width}f}')
-
-
