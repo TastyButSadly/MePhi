@@ -16,7 +16,7 @@ def decompose_into_cubes(n, max_attempts=8):
 
 
 success_pop = 0
-upper_lim = 5000
+upper_lim = 5000  # до какого числа проверяем
 
 for num in range(1, upper_lim + 1):
     decomposition = decompose_into_cubes(num)

@@ -1,40 +1,29 @@
-from math import trunc
+import os
+import json
+
+def char_occurr(file_path):
+    char_occ = load_char_occurr()
+
+    abs_file_path = os.path.abspath(file_path)  # асболютный путь к файлу
+
+    with open(abs_file_path, 'r', encoding='utf-8') as file:
+        data = file.read()
+        for char in data:
+            char_occ[char] = char_occ.get(char, 0) + 1
+
+    char_occ = dict(sorted(char_occ.items()))  # для красоты отсортируем по ключу
+    save_occurr(char_occ)
 
 
-def solve_cube_sum(n, result_list, max_attempts):
-    sum = n
-    attempts_cur = max_attempts  # оставшееся количество попыток
-
-    while sum > 0:  # пока число не разложено
-        if attempts_cur > 0:
-            current_cube_root = trunc(float((sum ** (1 / 3)))) - 1
-            attempts_cur -= 1
-        else:
-            current_cube_root = trunc(float((sum ** (1 / 3))))
-
-        if current_cube_root <= 1:
-            current_cube_root = trunc(float((sum ** (1 / 3))))
-
-        if attempts_cur > current_cube_root:
-            return 0
-
-        result_list.append(current_cube_root ** 3)
-        sum -= current_cube_root ** 3
-
-        if len(result_list) > 7:
-            result_list.clear()
-            solve_cube_sum(n, result_list, max_attempts + 1)
-
-    return result_list
+def load_char_occurr():  # открытие json
+    with open('char_occurr.json', 'r', encoding='utf-8') as json_file:
+        return json.load(json_file)
 
 
-result_list = []
-max_attempts = 8
-input_number = int(input())
-print(solve_cube_sum(input_number, result_list, max_attempts))
-# count_num = 0
-# for i in range(1, 5001):
-#     if solve_cube_sum(i, result_list, 8):
-#         count_num += 1
-#
-# print(count_num)
+def save_occurr(char_occurr):  # сохранение json
+    with open('char_occurr.json', 'w', encoding='utf-8') as json_file:
+        json.dump(char_occurr, json_file, ensure_ascii=False)
+
+
+file_name = 'Ницше.txt'
+char_occurr(file_name)

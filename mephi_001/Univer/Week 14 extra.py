@@ -3,20 +3,21 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-n = 100  # количество разбиений
+n = 10  # количество разбиений
 
 
 def f(x):
-    return np.sin(x)
+    return (np.sin(x)) ** 5
 
 
-a, b = 0, np.pi / 2
+a, b = 0, np.pi
 
-exact_integral = np.cos(a) - np.cos(b)  # точное значение интеграла
-
+exact_integral = 1 / 240 * (150 * np.cos(a) - 25 * np.cos(3 * a) + 3 * np.cos(5 * a) -
+                            150 * np.cos(b) + 25 * np.cos(3 * b) - 3 * np.cos(5 * b))
 h = (b - a) / n
 
 x = np.linspace(a, b, n + 1)
+print(x)
 
 plt.plot(x, f(x), label='sin(x)')
 
@@ -37,10 +38,11 @@ error_left = np.abs(left_rectangles - exact_integral)
 error_right = np.abs(right_rectangles - exact_integral)
 error_midpoint = np.abs(midpoint_rectangles - exact_integral)
 
-width = 5  # количество знаков после запятой
-print(f'Error left :     {error_left:{width}f}\n'
-      f'Error right :    {error_right:{width}f}\n'
-      f'Error midpoint : {error_midpoint:{width}f}')
+width = 10  # количество знаков после запятой
+print(f'Error left :     {error_left}\n'
+      f'Error right :    {error_right}\n'
+      f'Error midpoint : {error_midpoint}')
+print(exact_integral)
 
 plt.title('sin(x)')
 plt.xlabel('x')
