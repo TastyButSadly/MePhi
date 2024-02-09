@@ -19,36 +19,33 @@ def plot_data(file_path):
     return X, Y
 
 
-with open(config_file, 'r') as f:
-    config1 = json.load(f)
-with open(config_file, 'r') as f:
-    config2 = json.load(f)
-# Загрузка конфигурации для первого графика
-# config = load_config('config1.json')
-config = load_config('config2.json')
-graph1 = config['graph1']
-X, Y = plot_data(graph1['file_path'])
-coeff = np.polyfit(X, Y, 2)
-yn = np.poly1d(coeff)
+with open('config2.json', 'r') as f:
+    config = json.load(f)
 
 # первый график
+graph1 = config['graph1']
+X, Y = plot_data(graph1['file_path'])
+coeff = np.polyfit(X, Y, graph1['poly_degree'])
+yn = np.poly1d(coeff)
+
 plt.plot(np.linspace(0, max(X), 100), yn(np.linspace(0, max(X), 100)),
          label=graph1['label'], color=graph1['color'], linestyle=graph1['line_style'])
-plt.scatter(X, Y, label=graph1['label'], color=graph1['color'], marker=graph1['marker_style'], s=graph1['marker_size'])
+plt.scatter(X, Y, label=graph1['label'], color=graph1['color'],
+            marker=graph1['marker_style'], s=graph1['marker_size'])
 
-# Загрузка конфигурации для второго графика
+# второй график
 graph2 = config['graph2']
 X1, Y1 = plot_data(graph2['file_path'])
-coeff1 = np.polyfit(X1, Y1, 2)
+coeff1 = np.polyfit(X1, Y1, graph2['poly_degree'])
 yn1 = np.poly1d(coeff1)
+if graph2['log_scale']:
+    plt.semilogy()
 
-#  второй графика
 plt.plot(np.linspace(0, max(X1), 100), yn1(np.linspace(0, max(X1), 100)),
          label=graph2['label'], color=graph2['color'], linestyle=graph2['line_style'])
 plt.scatter(X1, Y1, label=graph2['label'], color=graph2['color'], marker=graph2['marker_style'],
             s=graph2['marker_size'])
 
-# Оформление графика
 common = config['common']
 plt.xlim(0, 2)
 plt.title(common['title'])

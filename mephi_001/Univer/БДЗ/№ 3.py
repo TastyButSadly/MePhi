@@ -12,7 +12,7 @@ def char_occurr(file_path):
             char_occ[char] = char_occ.get(char, 0) + 1
 
     char_occ = dict(sorted(char_occ.items()))  # для красоты отсортируем по ключу
-    save_occurr(char_occ)
+    json.dump(char_occurr, json_file, ensure_ascii=False)
 
 
 def load_char_occurr():  # открытие json
@@ -21,8 +21,7 @@ def load_char_occurr():  # открытие json
 
 
 def save_occurr(char_occurr):  # сохранение json
-    with open('char_occurr.json', 'w', encoding='utf-8') as json_file:
-        json.dump(char_occurr, json_file, ensure_ascii=False)
+
 
 
 file_name = 'Ницше.txt'

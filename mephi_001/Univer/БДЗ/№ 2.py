@@ -21,6 +21,9 @@ upper_lim = 5000  # до какого числа проверяем
 for num in range(1, upper_lim + 1):
     decomposition = decompose_into_cubes(num)
     if decomposition:
+        print(num, decomposition)
         success_pop += 1
+    else:
+        print(num)
 
 print(success_pop)
