@@ -1,0 +1,10 @@
+data_file_1: inertia_2.25_0.43.csv
+data_file_2: inertia_1.98_0.36.csv
+degree: 2
+plot_params:
+  axes_type: linear  # logarithmic
+  line_color: blue
+  line_style: solid
+  marker_style: o
+  x_label: X
+  y_label: Y

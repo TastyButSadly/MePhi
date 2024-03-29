@@ -9,8 +9,11 @@ def random_walk(x, y, t):
 
     trace = [[], []]
 
+    # if it's necessary to jump within a square, leave it as is
+    # else if it's necessary to jump within a circle, comment lines 22 and 23 and recommend others
+    
     for _ in range(t + 1):
-        #jump_direction = np.random.uniform(0, 2 * np.pi)
+        # jump_direction = np.random.uniform(0, 2 * np.pi)
         dl_max = dl
         # dl_max = abs(dl / np.cos(jump_direction))
         # dl_i = np.random.uniform(0, dl_max)
